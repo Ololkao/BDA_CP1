@@ -1,0 +1,1 @@
+python GRAPE/train_y.py --epochs 100 --valid 0.1 uci --data winequality-red
