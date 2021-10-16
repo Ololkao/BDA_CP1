@@ -1,0 +1,93 @@
+---
+title: "遺失值填補"
+author: "高涵毅"
+date: "2021/10/17"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+library(reticulate)
+knitr::knit_engines$set(python = reticulate::eng_python)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{python}
+import pandas as pd
+import numpy as np
+import os
+from IPython.display import display
+from sklearn.model_selection import train_test_split
+from tensorflow.random import set_seed
+set_seed(42)
+
+import missingno as msno
+# %matplotlib inline
+
+from sklearn.experimental import enable_iterative_imputer
+from sklearn.impute import IterativeImputer, KNNImputer
+from fancyimpute import SoftImpute, IterativeSVD, MatrixFactorization, NuclearNormMinimization, BiScaler, SimilarityWeightedAveraging
+from sklearn.pipeline import Pipeline
+
+from sklearn.ensemble import RandomForestRegressor
+from lightgbm import LGBMRegressor
+from xgboost import XGBRegressor, XGBRFRegressor
+from sklearn.metrics import mean_absolute_error
+
+```
+
+```{python}
+for i in range(1,8,1):
+    temp0_df = pd.read_csv(f"data{i}/train.csv", header=None)
+    globals()[f'train{i}'] = temp0_df.iloc[:,:-1]
+    globals()[f'answer{i}'] = temp0_df.iloc[:,-1]
+    temp1_df = pd.read_csv(f"data{i}/test.csv", header=None)
+    globals()[f'test{i}'] = temp1_df.iloc[:,:-1]
+
+```
+
+```{r}
+source_python("make_upload.py")
+```
+
+```{r}
+library(missForest)
+doParallel::registerDoParallel()
+for (j in 1:7) {
+  object <- paste0("temp_", "test", j)
+  imputer <- missForest(xmis=get(paste0("test",j)), maxiter=10, parallelize="forests")
+  # X.imp <- imputer$ximp
+  assign(object, imputer$ximp)
+}
+
+```
+
+```{python}
+states = ["train", "test"]
+idx = 1
+for i in range(1,8,1):
+    eval(f'r.temp_{states[idx]}{i}').to_csv(f'data{i}/{states[idx]}_forest.csv', header=None, index=None)
+
+```
+
+```{python}
+make_upload(imputer=None, status=True)
+
+```
+
+<!-- ## R Markdown -->
+
+<!-- For more details on using R Markdown see <http://rmarkdown.rstudio.com>. -->
+
+<!-- click the **Knit** button -->
+
+<!-- ```{r cars} -->
+<!-- summary(cars) -->
+<!-- ``` -->
+
+<!-- ## Including Plots -->
+
+<!-- ```{r pressure, echo=FALSE} -->
+<!-- plot(pressure) -->
+<!-- ``` -->
+
+<!-- Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot. -->
