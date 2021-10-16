@@ -49,7 +49,7 @@ for i in range(1,8,1):
 source_python("make_upload.py")
 ```
 
-```{r}
+```{r, eval=FALSE}
 library(missForest)
 doParallel::registerDoParallel()
 for (j in 1:7) {
@@ -61,7 +61,7 @@ for (j in 1:7) {
 
 ```
 
-```{python}
+```{python, eval=FALSE}
 states = ["train", "test"]
 idx = 1
 for i in range(1,8,1):
@@ -69,7 +69,7 @@ for i in range(1,8,1):
 
 ```
 
-```{python}
+```{python, eval=FALSE}
 make_upload(imputer=None, status=True)
 
 ```
