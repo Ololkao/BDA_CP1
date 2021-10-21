@@ -132,12 +132,16 @@ g(X_train, X_valid, y_train, y_valid) %=% train_test_split(r_to_py(train1), r_to
 states = ["train", "test"]
 for state in states:
     for i in range(1,8,1):
-        eval(f'r.temp_{state}{i}').to_csv(f'data{i}/{state}_forest_full.csv', header=None, index=None)
+        eval(f'r.temp_{state}{i}').round(2).to_csv(f'data{i}/{state}_forest_full.csv', header=None, index=None)
+
+# for i in range(1,8,1):
+#     concat = pd.concat([r[f'temp_train{i}'], pd.Series(r[f'answer{i}'])], axis=1)
+#     concat.round(2).to_csv(f'data{i}/train_forest_full.csv', header=None, index=None)
 
 ```
 
 ```{python, eval=FALSE}
-make_upload(imputer=None, status=False)
+make_upload(imputer=None, status=True)
 
 ```
 
