@@ -1,1 +1,0 @@
-python GRAPE/train_mdi.py --epochs 100 --valid 0.1 --save_model --save_prediction uci --data winequality-red
