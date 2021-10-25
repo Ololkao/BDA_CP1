@@ -2,7 +2,11 @@
 
 HW2: Learning with Missing Data
 
-## 乾糧:smile:
+Group name: 大可不必
+
+## 參考網址
+
+<!-- ## 乾糧:smile: -->
 
 > *t*owards *d*ata *s*cience 這個網站建議用無痕模式
 
@@ -10,7 +14,7 @@ HW2: Learning with Missing Data
 
 需要安裝新版RStudio以及reticulate這個package
 
-[RStudio Support](https://support.rstudio.com/hc/en-us/articles/1500007929061-Using-Python-with-the-RStudio-IDE?version=2021.09.0%2B351&mode=desktop) :+1:
+[RStudio Support](https://support.rstudio.com/hc/en-us/articles/1500007929061-Using-Python-with-the-RStudio-IDE?version=2021.09.0%2B351&mode=desktop) <!--:+1:-->
 
 [tds教學一](https://towardsdatascience.com/why-choose-between-r-and-python-b12bf409d0d0)
 
@@ -22,7 +26,7 @@ HW2: Learning with Missing Data
 
 ### Missing Value Imputation
 
-R的方法真的比較多:cry:
+<!-- R的方法真的比較多:cry: -->
 
 [詳細的R教學](https://rmisstastic.netlify.app/how-to/impute/missImp.pdf)
 
